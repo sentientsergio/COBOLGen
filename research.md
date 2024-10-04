@@ -63,7 +63,3 @@ The literature on synthetic data generation and COBOL translation demonstrates t
 3. AIMultiple, “Agentic AI: 8 Use Cases & Real-life Examples.” Available: [https://research.aimultiple.com/agentic-ai](https://research.aimultiple.com/agentic-ai)
 4. MDPI, “GeMSyD: Generic Framework for Synthetic Data Generation.” Available: [https://www.mdpi.com/2306-5729/9/1/14](https://www.mdpi.com/2306-5729/9/1/14)
 5. AWS, “What is Synthetic Data?” Available: [https://aws.amazon.com/what-is/synthetic-data/](https://aws.amazon.com/what-is/synthetic-data/)
-
-## References
-
-Stanford University. (2023). _Synthetic data generation for legacy COBOL code translation using agentic AI, retrieval-augmented generation, and LLM-based benchmarking tools_. STORM Research Report. Retrieved from https://storm.genie.stanford.edu/article/143613
