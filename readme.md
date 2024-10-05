@@ -28,22 +28,23 @@ This literature review explores:
 - The use of Agentic AI and RAG to generate and enhance COBOL data.
 - Related works in legacy language translation and the role of synthetic data in benchmarking.
 
-### 3. [COBOLGen Methodology Document](./methodology.md)
+### 3. [COBOLGen Benchmark Pilot Architecture Document](./architecture.md)
 
-This document outlines the detailed methodology for generating synthetic COBOL projects using Autogen and RAG. It provides a comprehensive plan on how the COBOLGen tool will:
+This architecture document provides a comprehensive overview of the system design and technology stack for the COBOLGen Benchmark Pilot. It covers:
 
-- Receive initial requirements from human experts.
-- Use Agentic AI for autonomous project planning and development.
-- Integrate RAG for informed generation of complex COBOL projects that include multiple sources and copybooks.
+- Key architectural components, including the Autogen framework, Retrieval-Augmented Generation (RAG), and cloud-based infrastructure.
+- The integration of large language models (LLMs) and how they support the project's objectives.
+- Details on the development environment, tools, and technologies used to facilitate agile development and rapid iteration.
+- Architectural workflows and data flow diagrams that illustrate system interactions and processes.
 
-### 4. [COBOLGen Benchmark Pilot Planning Document](./plans/master.md)
+### 4. [COBOLGen Benchmark Pilot Agile Planning Document](./plans/agile.md)
 
-This planning document is a 'plan of plans' for implementing the COBOLGen Benchmark Pilot. It covers:
+This agile planning document outlines the iterative approach for implementing the COBOLGen Benchmark Pilot. It covers:
 
-- Project phases, starting from environment setup to the final reporting and documentation.
+- Sprint cycles, starting from project kickoff and setup to continuous improvement and feedback integration.
 - Details on setting up development environments, creating a GitHub repository, collaborating with COBOL experts, and building the synthetic COBOL datasets.
-- Phases include preparation, agentic AI and RAG development, data generation, validation, and iteration.
-- Each phase will link to a more detailed step by step planning document for the implementation of that phase.
+- Sprints include initial setup, Autogen agent development, LLM integration, RAG implementation, and MVP release.
+- Each sprint focuses on delivering a potentially shippable product increment, with regular reviews and retrospectives to adapt and refine the process.
 
 ## Key Technologies
 
