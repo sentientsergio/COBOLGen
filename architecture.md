@@ -1,154 +1,153 @@
 # Architecture Document for the COBOLGen Benchmark Pilot
 
-## Table of Contents
+## Introduction
 
-1. [Introduction](#introduction)
-2. [Project Overview](#project-overview)
-3. [Architectural Components](#architectural-components)
-   - [Autogen Framework (Agentic AI)](#autogen-framework-agentic-ai)
-   - [Retrieval-Augmented Generation (RAG)](#retrieval-augmented-generation-rag)
-   - [Large Language Models (LLMs)](#large-language-models-llms)
-   - [Knowledge Base for RAG](#knowledge-base-for-rag)
-   - [Python Development Environment](#python-development-environment)
-   - [Cloud-Based Infrastructure](#cloud-based-infrastructure)
-   - [Version Control and Collaboration](#version-control-and-collaboration)
-   - [Testing and Validation Frameworks](#testing-and-validation-frameworks)
-   - [Documentation and Reporting Tools](#documentation-and-reporting-tools)
-4. [Architectural Workflow](#architectural-workflow)
-5. [Data Flow Diagram](#data-flow-diagram)
-6. [Security and Compliance](#security-and-compliance)
-7. [Scalability and Performance Considerations](#scalability-and-performance-considerations)
-8. [Conclusion](#conclusion)
+This document outlines the architecture for the **COBOLGen Benchmark Pilot** project, which aims to create a comprehensive library of synthetic, non-trivial COBOL programs. These programs are designed to systematically cover all COBOL language features and mainframe capabilities, facilitating the training and testing of large language models (LLMs) for COBOL-to-modern-language translation.
 
 ---
 
-## Introduction
-
-This document outlines the architecture for the COBOLGen Benchmark Pilot project, which aims to develop synthetic COBOL datasets for benchmarking the performance of large language models (LLMs) in translating COBOL programs to modern languages.
-
-## Project Overview
-
-The project leverages AI frameworks, cloud infrastructure, and collaboration tools to automate the generation of synthetic COBOL projects. The goal is to simulate a team of AI agents that plan, code, review, and integrate complex COBOL applications.
-
 ## Architectural Components
 
-### Autogen Framework (Agentic AI)
+### Feature Matrix and Combination Engine
 
-- **Description:** Automates the generation and collaboration of a team of AI agents. Design will address the structure of the Autogen framework and the specific Autogen agents that will be used.
-- **Technologies Used:** Link to Autogen framework: https://github.com/microsoft/autogen. This repository will be forked and used locally.
+- **Description**: A core component that maintains a comprehensive list of COBOL language features, mainframe capabilities, and application domains. It systematically generates valid combinations of these features to ensure full coverage across the generated programs.
+- **Technologies Used**: Python scripts for managing the Feature Matrix and generating combinations; data storage solutions (like CSV, JSON, or databases) for managing feature data.
 
-### Retrieval-Augmented Generation (RAG)
+### Requirement Generation Engine
 
-- **Description:** Enhances code generation by providing context from existing COBOL codebases and domain-specific knowledge.
-- **Technologies Used:** Combines large language models with a retrieval system. Autogen includes RAG as a feature and will be used in the implementation.
+- **Description**: Automates the creation of detailed requirement specifications based on the feature combinations. Uses templates and prompt engineering to guide AI models in generating realistic business scenarios.
+- **Technologies Used**: Python scripting, template libraries (e.g., Jinja2), integration with AI language models for enriching requirements.
 
-### Large Language Models (LLMs)
+### AI-Assisted Code Generation Module
 
-- **Description:** Used for generating and refining COBOL code, and assisting in translating COBOL to modern languages.
-- **Technologies Used:** OpenAI o1-preview will be used for the agents with the most abstract and high-level planning functions. GPT4o will be used for agents with narrower more specific generation tasks.
+- **Description**: Utilizes AI models to generate COBOL code that fulfills the detailed requirements. Ensures that the generated code is coherent, functional, and reflective of real-world business logic.
+- **Technologies Used**: Integration with advanced AI language models (e.g., OpenAI GPT-4), prompt engineering techniques, API interfaces.
 
-### Knowledge Base for RAG
+### Validation and Quality Assurance Layer
 
-- **Description:** Serves as the contextual database for RAG, containing COBOL syntax, semantics, and best practices.
-- **Technologies Used:** To include at least the GNUCobol Sample Programs and whatever additional sources are relevant to the COBOL language and its idioms. Also should include summaries of the syntax and semantics of Cobol
+- **Description**: Implements automated validation processes to ensure the syntactic and functional correctness of the generated COBOL programs. Includes optional execution of programs with test data and human-in-the-loop reviews.
+- **Technologies Used**: COBOL compilers/interpreters (e.g., GnuCOBOL) for syntax checking, testing frameworks (like pytest-cobol), automated scripts for batch validation.
+
+### Documentation and Metadata Generator
+
+- **Description**: Produces accompanying documentation and metadata for each generated program, detailing the included features, usage instructions, and annotations within the code.
+- **Technologies Used**: Scripting tools for metadata generation, documentation frameworks like Sphinx or MkDocs.
 
 ### Python Development Environment
 
-- **Description:** Develops and hosts Autogen agents, orchestrates interactions between components.
-- **Technologies Used:** Python 3.x, `pipenv` or `poetry`., Cursor AI will be used for code generation. v0 will be used when UI code is being designed as it specializes int that
+- **Description**: Serves as the primary development environment for scripting and orchestrating the various components of the system.
+- **Technologies Used**: Python 3.x, package managers like `pipenv` or `poetry`, IDEs like VSCode with extensions for Python and COBOL, Cursor AI for code assistance.
 
-### Cloud-Based Infrastructure
+### Large Language Models (LLMs)
 
-- **Description:** Provides scalable computing resources for running Autogen agents and managing datasets.
-- **Technologies Used:** The OpenAI API will be used to host the model. The python application will be containerized using Docker and orchestrated using Kubernetes so that after running locally it can be containerized and run in a cloud environment.
+- **Description**: Employed for generating detailed requirements and COBOL code based on prompts. They help ensure that the generated code is realistic and incorporates specified features.
+- **Technologies Used**: OpenAI GPT-4 accessed via API, with appropriate handling of API keys and usage limits.
 
 ### Version Control and Collaboration
 
-- **Description:** Manages codebase, tracks changes, and facilitates team collaboration.
-- **Technologies Used:** GitHub, Git.
+- **Description**: Manages the codebase, tracks changes, and facilitates collaboration during development.
+- **Technologies Used**: Git for version control, GitHub for repository hosting, issue tracking, and collaboration features.
 
 ### Testing and Validation Frameworks
 
-- **Description:** Ensures the correctness and quality of generated COBOL code.
-- **Technologies Used:** `pytest`, CI/CD pipelines, initially COBOL will be evaluated by humans but tests should be written to evaluate the quality of the cobol code after translation to allow for future evaluation by AI systems.
+- **Description**: Tools and frameworks used to validate the syntactic and functional correctness of the generated COBOL code.
+- **Technologies Used**: GnuCOBOL compiler for syntax checking, custom scripts for automated testing, potential use of continuous integration (CI) tools like GitHub Actions.
 
 ### Documentation and Reporting Tools
 
-- **Description:** Creates, maintains, and publishes project documentation.
-- **Technologies Used:** Markdown, MkDocs or Sphinx.
+- **Description**: Used to create and maintain project documentation, as well as generate metadata and annotations for the generated code.
+- **Technologies Used**: Markdown for documentation, Sphinx or MkDocs for generating documentation sites, Jupyter Notebooks for exploratory analysis.
+
+### Cloud-Based Infrastructure (Optional)
+
+- **Description**: Provides scalable computing resources for handling large-scale code generation tasks if local resources are insufficient.
+- **Technologies Used**: Cloud services like AWS (EC2, Lambda), Azure, or Google Cloud Platform for scalable compute resources.
+
+---
 
 ## Architectural Workflow
 
-1. **Requirement Gathering:** Inputs from human experts in JSON/YAML format detailing business requirements and COBOL features.
-2. **Agentic Planning with Autogen:** AI agents interpret requirements, plan project scope, and assign tasks.
-3. **Code Generation with RAG Support:** Agents generate COBOL code, utilizing RAG to fetch relevant context.
-4. **Code Review and Refinement:** Agents perform iterative reviews, leveraging LLMs to improve code quality.
-5. **Testing and Validation:** Automated testing frameworks validate the correctness of the generated code.
-6. **Benchmarking and Evaluation:** The synthetic COBOL datasets are used to benchmark LLM translation tools.
-7. **Iteration and Feedback:** Results inform further refinement of the agents and code generation process.
+1. **Feature Matrix Development**: Maintain a comprehensive Feature Matrix listing COBOL language features, mainframe capabilities, and application domains.
+
+2. **Systematic Feature Combination**: Use a combination engine to generate valid combinations of features, ensuring systematic coverage without redundancy.
+
+3. **Automated Requirement Generation**: For each feature combination, generate detailed requirement specifications using templates and AI assistance.
+
+4. **AI-Assisted Code Generation**: Utilize AI models to generate COBOL code based on the detailed requirements, ensuring inclusion of specified features.
+
+5. **Validation and Quality Assurance**:
+
+   - **Syntactic Validation**: Use COBOL compilers to check for syntax errors.
+   - **Functional Testing**: Optionally execute programs with test data to verify functionality.
+   - **Human Review**: Perform manual reviews on a subset of programs for quality assurance.
+
+6. **Documentation and Metadata Creation**: Generate metadata and documentation for each program, detailing features included, usage instructions, and annotations.
+
+7. **Dataset Assembly**: Organize the generated programs and documentation into a structured dataset suitable for LLM training and testing.
+
+8. **Iteration and Feedback**: Use insights from validation and testing to refine the generation process, updating templates and prompts as needed.
+
+---
 
 ## Data Flow Diagram
 
 ```mermaid
-graph TB;
-    A[Requirement Gathering] --> B[Agentic Planning with Autogen];
-    B --> C[Code Generation with RAG Support];
-    C --> D[Code Review and Refinement];
-    D --> E[Testing and Validation];
-    E --> F[Benchmarking and Evaluation];
-    F --> G[Iteration and Feedback];
-    G --> B;
+flowchart TD
+    A[Feature Matrix] --> B[Feature Combination Engine]
+    B --> C[Requirement Generation Engine]
+    C --> D[AI-Assisted Code Generation Module]
+    D --> E[Validation and Quality Assurance Layer]
+    E --> F[Documentation and Metadata Generator]
+    F --> G[Dataset Assembly]
+    G --> H[LLM Training and Testing Pipeline]
 ```
 
-[Include and reference any architectural diagrams that illustrate system interactions.]
+---
 
 ## Security and Compliance
 
-- **Data Security:**
+- **Data Security**:
 
-  - **In Transit:** All data transmitted between the client and server, including business requirements and generated COBOL code, will be encrypted using TLS (Transport Layer Security) to ensure secure communication.
-  - **At Rest:** Generated COBOL code and any other sensitive data stored on the server will be encrypted using industry-standard encryption algorithms (e.g., AES-256) to protect against unauthorized access.
+  - **API Keys Protection**: Secure storage of API keys and credentials using environment variables or secret management tools.
+  - **Data Encryption**: Use encryption for sensitive data at rest and in transit, especially if deploying on cloud infrastructure.
 
-- **Access Control:**
+- **Access Control**:
 
-  - **Authentication:** Implement a robust authentication mechanism to ensure that only authorized users can access the system. This could include multi-factor authentication (MFA) for added security.
-  - **Authorization:** Define and enforce user roles and permissions to control access to different parts of the system. Ensure that users can only perform actions that are necessary for their role.
+  - **Authentication and Authorization**: Implement access controls if a user interface is developed, ensuring only authorized users can initiate code generation processes.
 
-- **Compliance Standards:**
+- **Compliance Standards**:
 
-  - **GDPR:** If the system processes personal data of EU citizens, ensure compliance with the General Data Protection Regulation (GDPR) by implementing data protection measures and providing users with control over their data.
-  - **HIPAA:** If applicable, ensure compliance with the Health Insurance Portability and Accountability Act (HIPAA) by safeguarding any health-related information.
-  - **Data Retention Policies:** Establish clear data retention policies to ensure that data is stored only as long as necessary and is securely deleted when no longer needed.
+  - **Ethical Use of AI**: Adhere to the terms of service of AI models used, avoiding disallowed content and respecting usage policies.
+  - **Data Privacy**: Ensure that no proprietary or personal data is included in the generated code.
 
-- **Secure Downloads:**
+- **Regular Audits**:
+  - **Security Audits**: Periodically review the system for security vulnerabilities.
+  - **Usage Monitoring**: Monitor API usage to prevent abuse and manage costs.
 
-  - Ensure that all downloads of generated COBOL code are conducted over secure connections using HTTPS to prevent interception or tampering during transmission.
-
-- **Regular Security Audits:**
-
-  - Conduct regular security audits and vulnerability assessments to identify and address potential security risks. Implement a process for timely patching and updating of software components.
-
-- **Incident Response Plan:**
-  - Develop and maintain an incident response plan to quickly and effectively respond to any security breaches or incidents. This should include procedures for notification, containment, eradication, and recovery.
+---
 
 ## Scalability and Performance Considerations
 
-- **Scalability Strategies:**
+- **Scalability Strategies**:
 
-  - **Cloud Infrastructure:** Leverage cloud-based services (e.g., AWS, Azure, Google Cloud Platform) to dynamically allocate resources based on demand. This includes using auto-scaling groups for compute resources to handle varying workloads efficiently.
-  - **Containerization:** Utilize Docker containers to package and deploy applications consistently across different environments. This allows for easy scaling by adding more container instances as needed.
-  - **Microservices Architecture:** Consider breaking down the system into smaller, independent services that can be scaled individually. This approach allows for more granular control over resource allocation and scaling.
-  - **Load Balancing:** Implement load balancers to distribute incoming requests evenly across multiple instances, ensuring no single instance is overwhelmed and improving overall system reliability.
+  - **Parallel Processing**: Implement parallel execution of code generation and validation tasks to improve throughput.
+  - **Efficient Resource Utilization**: Optimize code to minimize unnecessary API calls and manage computational resources effectively.
+  - **Cloud Integration**: Leverage cloud services for on-demand scaling if local resources are insufficient.
 
-- **Performance Optimization:**
-  - **Efficient Code Generation:** Optimize the code generation process by using efficient algorithms and data structures. This can reduce the time and resources required to generate COBOL code.
-  - **Caching Mechanisms:** Implement caching strategies to store frequently accessed data and reduce the need for repeated computations or data retrievals. This can significantly improve response times.
-  - **Asynchronous Processing:** Use asynchronous processing for tasks that do not require immediate completion, such as batch processing of large datasets. This can free up resources for more critical tasks.
-  - **Monitoring and Profiling:** Continuously monitor system performance and use profiling tools to identify bottlenecks. Regularly analyze performance metrics to make informed decisions about optimizations and scaling.
-  - **Database Optimization:** If a database is used, ensure that it is optimized for performance with proper indexing, query optimization, and regular maintenance tasks like vacuuming and defragmentation.
+- **Performance Optimization**:
 
-This section outlines initial strategies and techniques to ensure that the system can handle increased demand and maintain optimal performance as the pilot evolves into a full-fledged product. These considerations will help in planning for future growth and ensuring a robust and responsive system.
+  - **Caching Mechanisms**: Cache results of expensive operations where possible to reduce redundant processing.
+  - **Asynchronous Operations**: Use asynchronous programming models to handle I/O-bound operations efficiently.
+  - **Batch Processing**: Group similar tasks to reduce overhead and improve processing efficiency.
+
+- **Monitoring and Logging**:
+  - Implement monitoring tools to track system performance metrics.
+  - Use logging to record processing times, errors, and resource utilization for ongoing optimization.
+
+---
 
 ## Conclusion
 
-This architecture document provides a comprehensive overview of the technology stack and workflow for the COBOLGen Benchmark Pilot project. It serves as a foundation for the implementation phase, ensuring alignment and efficiency.
+This updated architecture document reflects our new approach to systematically generating a comprehensive library of synthetic COBOL programs. By combining programmatic feature combination, AI-assisted code generation, and robust validation processes, we aim to create valuable datasets that will facilitate the training and testing of LLMs for COBOL-to-modern-language translation.
+
+This architecture emphasizes scalability, security, and maintainability, ensuring that the system can efficiently handle the generation of large datasets while adhering to best practices in software development and AI ethics.
