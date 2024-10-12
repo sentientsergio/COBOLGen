@@ -1,275 +1,365 @@
-# Agile Plan for COBOLGen Benchmark Pilot
+# Agile Plan for Building the MVP of COBOLGen Benchmark Pilot
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Project Goals](#project-goals)
+3. [Agile Development Approach](#agile-development-approach)
+4. [Sprint Overview](#sprint-overview)
+   - [Sprint 0: Project Setup and Planning](#sprint-0-project-setup-and-planning)
+   - [Sprint 1: Feature Matrix and Combination Engine](#sprint-1-feature-matrix-and-combination-engine)
+   - [Sprint 2: Requirement Generation Engine](#sprint-2-requirement-generation-engine)
+   - [Sprint 3: AI-Assisted Code Generation Module](#sprint-3-ai-assisted-code-generation-module)
+   - [Sprint 4: Validation and Quality Assurance Layer](#sprint-4-validation-and-quality-assurance-layer)
+   - [Sprint 5: Documentation and Metadata Generator](#sprint-5-documentation-and-metadata-generator)
+   - [Sprint 6: Dataset Assembly and Initial LLM Testing](#sprint-6-dataset-assembly-and-initial-llm-testing)
+5. [Roles and Responsibilities](#roles-and-responsibilities)
+6. [Communication and Collaboration](#communication-and-collaboration)
+7. [Tools and Technologies](#tools-and-technologies)
+8. [Risk Management](#risk-management)
+9. [Conclusion](#conclusion)
+10. [Appendix: User Stories](#appendix-user-stories)
+
+---
 
 ## Introduction
 
-The **COBOLGen Benchmark Pilot** aims to develop synthetic COBOL datasets to benchmark the performance of large language models (LLMs) in translating COBOL programs to modern languages. This agile plan outlines the iterative approach we will use to deliver value early and continuously, adapting to feedback and changing requirements.
+This agile plan outlines the step-by-step approach to develop the MVP of the **COBOLGen Benchmark Pilot**. The goal is to build a system that can generate a comprehensive library of synthetic, non-trivial COBOL programs, systematically covering all COBOL language features and mainframe capabilities.
 
----
+## Project Goals
+
+- **Systematic Feature Coverage**: Ensure that all COBOL language features and mainframe capabilities are included across the generated programs.
+- **Realistic Program Generation**: Create programs that simulate real-world business logic in common application domains.
+- **AI-Assisted Generation**: Utilize AI models for generating detailed requirements and COBOL code.
+- **Validation and Quality Assurance**: Implement automated validation processes to ensure code correctness.
+- **Scalable Architecture**: Design the system to efficiently generate large datasets suitable for LLM training.
 
 ## Agile Development Approach
 
-- **Iteration Length**: 2-week sprints.
-- **Team Roles**:
-  - **Product Owner**: Defines the vision and prioritizes the product backlog.
-  - **Scrum Master**: Facilitates the agile process and removes impediments.
-  - **Development Team**: Cross-functional team responsible for delivering shippable increments.
+- **Iteration Length**: Each sprint is two weeks long.
+- **Methodology**: Agile Scrum with flexibility to adapt as needed.
+- **Principles**:
+  - Deliver working software frequently.
+  - Welcome changing requirements.
+  - Collaborate closely and communicate openly.
+
+## Sprint Overview
+
+### Sprint 0: Project Setup and Planning
+
+**Duration**: 1 Week
+
+#### Goals
+
+- Set up development and collaboration tools.
+- Finalize project scope and MVP definition.
+- Prepare initial product backlog.
+
+#### Tasks
+
+- **Project Initialization**:
+  - Set up the GitHub repository with appropriate branching strategies.
+  - Configure Python development environment with `pipenv` or `poetry`.
+- **Tool Configuration**:
+  - Set up Notion for backlog management (Kanban board).
+  - Install necessary IDE extensions (VSCode with Python and COBOL support).
+- **Backlog Creation**:
+  - Define user stories and acceptance criteria.
+  - Prioritize user stories for upcoming sprints.
+- **Meeting Schedule**:
+  - Establish a schedule for stand-ups, sprint planning, reviews, and retrospectives.
+
+#### Deliverables
+
+- Initialized GitHub repository.
+- Configured development environment.
+- Populated and prioritized product backlog.
+- Agreed-upon meeting schedule.
 
 ---
 
-## Sprint Zero: Project Kickoff and Setup (Week 1)
+### Sprint 1: Feature Matrix and Combination Engine
 
-### Goals
+**Duration**: Weeks 1-2
 
-- **Establish Agile Framework**:
-  - Set up agile tools (e.g., Jira, Trello) for backlog management and sprint tracking.
-  - Schedule recurring meetings: daily stand-ups, sprint planning, reviews, and retrospectives.
-- **Define MVP and Backlog**:
-  - Identify the **Minimum Viable Product (MVP)** features.
-  - Create initial **User Stories** and populate the **Product Backlog**.
-- **Set Up Development Environment**:
-  - Configure Python development environment using `pipenv` or `poetry`.
-  - Initialize version control with GitHub repository.
+#### Sprint Goal
 
-### Deliverables
+Develop the Feature Matrix and build the engine to generate valid feature combinations for systematic coverage.
 
-- Agile tools configured and accessible.
-- Product backlog with prioritized user stories.
-- Development environment set up and tested.
+#### User Stories
 
----
+- **US01**: As a **developer**, I want to **create a comprehensive Feature Matrix**, so that **all COBOL features and mainframe capabilities are identified**.
+- **US02**: As a **system**, I need to **generate valid combinations of features**, so that **we can systematically cover all scenarios**.
 
-## Sprint 1: Basic Autogen Agent Prototype (Weeks 2-3)
+#### Tasks
 
-### Sprint Goal
+- **Feature Matrix Development**:
+  - List all COBOL language features.
+  - Enumerate mainframe capabilities.
+  - Identify common application domains.
+- **Feature Dependency Mapping**:
+  - Document dependencies and incompatibilities between features.
+- **Combination Engine Development**:
+  - Write a Python script to generate valid feature combinations.
+  - Implement constraints to avoid invalid combinations.
+- **Documentation**:
+  - Document the Feature Matrix and combination logic.
 
-Develop a basic Autogen agent capable of processing minimal input and producing placeholder COBOL code.
+#### Deliverables
 
-### User Stories
-
-- **US001**: As a **product manager**, I want to **input business requirements**, so that **the Autogen agent can generate COBOL code accordingly**.
-- **US002**: As a **developer**, I want to **receive placeholder COBOL code from the agent**, so that **I can validate the initial workflow**.
-
-### Tasks
-
-- Implement input handling for business requirements in JSON/YAML format.
-- Develop a simple Autogen agent that generates placeholder COBOL code.
-- Ensure the agent can run end-to-end in the development environment.
-
-### Deliverables
-
-- Functional Autogen agent prototype.
-- Documentation on usage and setup.
-- Demo of the agent processing input and producing output.
+- Completed Feature Matrix with dependencies mapped.
+- Working Feature Combination Engine script.
+- Documentation on Feature Matrix and combination process.
 
 ---
 
-## Sprint 2: Integration with LLM for Code Generation (Weeks 3-4)
+### Sprint 2: Requirement Generation Engine
 
-### Sprint Goal
+**Duration**: Weeks 3-4
 
-Enhance the Autogen agent to generate simple COBOL programs using an integrated LLM (e.g., OpenAI GPT-3.5).
+#### Sprint Goal
 
-### User Stories
+Develop the Requirement Generation Engine that creates detailed requirement specifications based on feature combinations.
 
-- **US003**: As a **developer**, I want the **Autogen agent to use an LLM for code generation**, so that **the generated COBOL code is syntactically correct**.
-- **US004**: As a **tester**, I want to **validate the generated COBOL code**, so that **it meets basic COBOL standards**.
+#### User Stories
 
-### Tasks
+- **US03**: As a **developer**, I want to **generate requirement templates**, so that **we can standardize requirement specifications**.
+- **US04**: As a **system**, I need to **automate requirement generation using AI**, so that **requirements are realistic and detailed**.
 
-- Integrate the LLM API with the Autogen agent.
-- Update the agent to generate syntactically correct COBOL code based on input.
-- Develop basic tests to validate the COBOL code.
+#### Tasks
 
-### Deliverables
+- **Template Design**:
+  - Create requirement specification templates with placeholders for features.
+- **Prompt Engineering**:
+  - Develop prompts for AI models to generate enriched requirements.
+- **Requirement Generation Script**:
+  - Implement a script to automate the generation of requirements using the templates and prompts.
+- **Integration with AI Models**:
+  - Set up API access to AI models (e.g., OpenAI GPT-4).
+  - Handle API key management securely.
+- **Testing and Validation**:
+  - Generate sample requirements and validate their quality.
+- **Documentation**:
+  - Document the requirement generation process and how to adjust templates and prompts.
 
-- Autogen agent generating simple COBOL code via LLM.
-- Initial test suite for code validation.
-- Updated documentation and demo.
+#### Deliverables
 
----
-
-## Sprint 3: Knowledge Base Setup for RAG (Weeks 4-5)
-
-### Sprint Goal
-
-Set up the Knowledge Base and implement Retrieval-Augmented Generation (RAG) to enhance the context of code generation.
-
-### User Stories
-
-- **US005**: As a **data engineer**, I want to **create a knowledge base of COBOL resources**, so that **the agent can use it for contextual code generation**.
-- **US006**: As a **developer**, I want the **agent to utilize RAG**, so that **the generated code aligns with domain-specific knowledge**.
-
-### Tasks
-
-- Curate and index COBOL documentation and sample code.
-- Implement a retrieval system to interface between the agent and the knowledge base.
-- Modify the Autogen agent to use RAG during code generation.
-
-### Deliverables
-
-- Functional knowledge base accessible to the agent.
-- Autogen agent enhanced with RAG.
-- Demonstrations showing improved code generation using context.
+- Requirement specification templates.
+- Requirement Generation Engine script.
+- Sample generated requirements.
+- Documentation on the requirement generation process.
 
 ---
 
-## Sprint 4: Automated Code Review and Testing Framework (Weeks 5-6)
+### Sprint 3: AI-Assisted Code Generation Module
 
-### Sprint Goal
+**Duration**: Weeks 5-6
 
-Develop automated code review capabilities using LLMs and establish a testing framework for continuous integration.
+#### Sprint Goal
 
-### User Stories
+Develop the module that uses AI models to generate COBOL code based on detailed requirements.
 
-- **US007**: As a **QA engineer**, I want to **automate code reviews**, so that **code quality is consistently maintained**.
-- **US008**: As a **developer**, I want a **testing framework**, so that **I can ensure the correctness of generated code**.
+#### User Stories
 
-### Tasks
+- **US05**: As a **system**, I need to **generate COBOL code using AI**, so that **the code includes specified features and business logic**.
+- **US06**: As a **developer**, I want to **ensure code is syntactically correct**, so that **it can be compiled and tested**.
 
-- Integrate LLMs for automated code review and suggestions.
-- Set up testing frameworks (`pytest`, COBOL testing tools).
-- Implement continuous integration (CI) workflows using GitHub Actions.
+#### Tasks
 
-### Deliverables
+- **Integration with AI Models**:
+  - Set up API calls to generate COBOL code from requirements.
+- **Prompt Refinement**:
+  - Optimize prompts to guide the AI in generating accurate code.
+- **Code Generation Script**:
+  - Implement a script to automate code generation for each requirement.
+- **Initial Validation**:
+  - Compile generated COBOL code using a COBOL compiler (e.g., GnuCOBOL).
+  - Fix any syntax errors by adjusting prompts or post-processing code.
+- **Testing on Sample Requirements**:
+  - Generate code for a subset of requirements and validate results.
+- **Documentation**:
+  - Document the code generation process and prompt guidelines.
 
-- Automated code review process in place.
-- Testing framework operational with initial test cases.
-- CI workflows configured for the project repository.
+#### Deliverables
 
----
-
-## Sprint 5: MVP Release and User Feedback (Weeks 6-7)
-
-### Sprint Goal
-
-Deploy the MVP to a staging environment and collect feedback from stakeholders to guide future development.
-
-### User Stories
-
-- **US009**: As a **stakeholder**, I want to **interact with the MVP**, so that **I can provide feedback on its functionality**.
-- **US010**: As a **product owner**, I want to **gather user feedback**, so that **we can prioritize future enhancements**.
-
-### Tasks
-
-- Deploy the MVP to a staging or demo environment.
-- Prepare demonstration materials and user guides.
-- Collect and analyze feedback from stakeholders and potential users.
-
-### Deliverables
-
-- Deployed MVP accessible to stakeholders.
-- Feedback documentation and analysis.
-- Updated product backlog with new user stories based on feedback.
+- AI-Assisted Code Generation Module script.
+- Sample generated COBOL programs.
+- Documentation on code generation and prompt engineering.
 
 ---
 
-## Subsequent Sprints: Continuous Improvement (Weeks 7 onwards)
+### Sprint 4: Validation and Quality Assurance Layer
 
-### Approach
+**Duration**: Weeks 7-8
 
-- **Sprint Planning**: At the start of each sprint, select high-priority items from the product backlog.
-- **Development and Testing**: Implement features, enhancements, and fixes.
-- **Review and Retrospective**: At the end of each sprint, review progress with stakeholders and reflect on process improvements.
+#### Sprint Goal
 
-### Focus Areas
+Implement automated validation processes to ensure syntactic and functional correctness of the generated COBOL code.
 
-- Enhance the Autogen agent's capabilities and intelligence.
-- Expand the knowledge base with more comprehensive resources.
-- Improve system scalability and performance based on real-world usage.
-- Incorporate advanced features like microservices architecture, load balancing, and cloud optimization.
+#### User Stories
+
+- **US07**: As a **QA engineer**, I want to **automate syntactic validation**, so that **we can quickly identify and fix code issues**.
+- **US08**: As a **developer**, I need to **implement functional testing**, so that **the code performs as intended**.
+
+#### Tasks
+
+- **Automated Syntactic Validation**:
+  - Develop scripts to batch compile COBOL programs and log errors.
+- **Functional Testing Framework**:
+  - Design a testing framework for executing programs with test data.
+  - Create test data sets for sample programs.
+- **Error Handling and Reporting**:
+  - Implement mechanisms to capture and report compilation and execution errors.
+- **Human-in-the-Loop Review**:
+  - Set up a process for manual review of a subset of programs.
+- **Continuous Integration Setup**:
+  - Configure CI tools (e.g., GitHub Actions) to automate validation on code updates.
+- **Documentation**:
+  - Document the validation processes and how to interpret reports.
+
+#### Deliverables
+
+- Validation scripts and tools.
+- Functional testing framework with sample test cases.
+- CI pipeline configured for automated validation.
+- Documentation on validation procedures.
+
+---
+
+### Sprint 5: Documentation and Metadata Generator
+
+**Duration**: Weeks 9-10
+
+#### Sprint Goal
+
+Develop tools to generate documentation and metadata for each program, detailing included features and usage instructions.
+
+#### User Stories
+
+- **US09**: As a **user**, I want **detailed metadata for each program**, so that **I understand what features are included**.
+- **US10**: As a **developer**, I need to **automate documentation generation**, so that **it's consistent and up-to-date**.
+
+#### Tasks
+
+- **Metadata Schema Design**:
+  - Define the structure of metadata for programs (e.g., features included, dependencies, instructions).
+- **Documentation Templates**:
+  - Create templates for program documentation.
+- **Automation Scripts**:
+  - Implement scripts to generate metadata and documentation based on the feature combinations and requirements.
+- **Code Annotation**:
+  - Insert comments or annotations within the code to highlight features.
+- **Testing and Verification**:
+  - Generate documentation for sample programs and verify accuracy.
+- **Documentation**:
+  - Document the metadata generation process and how to customize it.
+
+#### Deliverables
+
+- Metadata schema and documentation templates.
+- Documentation and Metadata Generator scripts.
+- Sample documentation and metadata files.
+- Documentation on the generation process.
 
 ---
 
-## Agile Artifacts
+### Sprint 6: Dataset Assembly and Initial LLM Testing
 
-### Product Backlog
+**Duration**: Weeks 11-12
 
-A living document containing prioritized user stories capturing all desired functionalities and enhancements. Regularly updated based on stakeholder feedback and project insights.
+#### Sprint Goal
 
-### Sprint Backlogs
+Assemble the generated programs and documentation into a structured dataset and perform initial testing with LLMs.
 
-For each sprint, a selection of user stories is committed to by the team, along with defined tasks and acceptance criteria.
+#### User Stories
 
-### Burndown Charts
+- **US11**: As a **data scientist**, I want to **use the dataset for LLM training**, so that **I can evaluate model performance**.
+- **US12**: As a **project manager**, I need to **ensure the dataset is well-organized**, so that **it's easily usable by others**.
 
-Visual representations used to track sprint progress and remaining work, helping the team to adjust efforts as needed.
+#### Tasks
 
-### Definition of Done
+- **Dataset Structuring**:
+  - Organize programs, metadata, and documentation into a coherent directory structure.
+- **Data Packaging**:
+  - Prepare the dataset for distribution (e.g., zipping files, creating manifests).
+- **Initial LLM Training**:
+  - Use the dataset to train or fine-tune an LLM for COBOL translation.
+- **Performance Evaluation**:
+  - Evaluate the LLM's performance on translating the generated programs.
+  - Identify any issues or areas for improvement.
+- **Feedback Incorporation**:
+  - Use insights to refine generation processes or prompts.
+- **Documentation**:
+  - Document the dataset contents and usage instructions.
 
-A shared understanding that a user story is complete when:
+#### Deliverables
 
-- Code is written, tested, and peer-reviewed.
-- Feature is integrated and passes all acceptance criteria.
-- Documentation is updated accordingly.
-- Deployed to the appropriate environment.
+- Assembled dataset ready for use.
+- Initial LLM performance report.
+- Documentation on dataset structure and usage.
 
 ---
+
+## Roles and Responsibilities
+
+- **Product Owner**: Defines the vision, prioritizes the backlog, and accepts deliverables.
+- **Scrum Master**: Facilitates the agile process, removes impediments, and ensures the team adheres to Scrum practices.
+- **Development Team**: Responsible for implementing the tasks, including developers, QA engineers, and data scientists.
+- **AI Specialist**: Focuses on AI model integration and prompt engineering.
+- **Quality Assurance**: Ensures the quality of the generated code and documentation.
+
+_(Note: Since you're working as a solopreneur, these roles may be combined or adjusted as needed.)_
 
 ## Communication and Collaboration
 
-- **Daily Stand-ups**: 15-minute meetings to synchronize activities and address impediments.
-- **Sprint Reviews**: Present completed work to stakeholders for feedback.
-- **Sprint Retrospectives**: Reflect on the sprint to identify improvements.
-
----
+- **Daily Check-ins**: Personal review of progress and planning for the day.
+- **Sprint Planning Meetings**: At the start of each sprint to define goals and tasks.
+- **Sprint Reviews**: At the end of each sprint to assess achievements.
+- **Sprint Retrospectives**: Reflect on what went well and what can be improved.
+- **Tools**:
+  - **Notion**: For backlog management and documentation.
+  - **GitHub**: For version control and issue tracking.
+  - **VSCode**: As the primary development environment.
 
 ## Tools and Technologies
 
-- **Project Management**: Jira or Trello for backlog and sprint management.
-- **Communication**: Slack or Microsoft Teams for team collaboration.
-- **Version Control**: Git and GitHub for code repositories.
-- **CI/CD**: GitHub Actions for continuous integration and deployment.
-- **Development**: Python 3.x, `pipenv` or `poetry` for environment management.
-- **Testing**: `pytest`, COBOL testing tools for automated testing.
-- **Documentation**: Markdown for documentation, with potential use of MkDocs or Sphinx for site generation.
+- **Programming Languages**: Python for scripting and automation.
+- **AI Models**: OpenAI GPT-4 for requirement and code generation.
+- **COBOL Tools**: GnuCOBOL compiler for validation.
+- **Testing Frameworks**: Custom scripts or pytest for validation processes.
+- **Documentation Tools**: Markdown, Sphinx or MkDocs for generating documentation.
+- **Version Control**: Git and GitHub for code management.
+- **CI/CD**: GitHub Actions for continuous integration.
 
----
+## Risk Management
 
-## Continuous Integration and Deployment
-
-- Implement CI/CD pipelines to automate testing and deployment processes.
-- Ensure that every code change undergoes automated testing before integration.
-- Deploy incremental updates to staging or production environments for immediate access.
-
----
-
-## Risk Management in Agile
-
-- **Flexible Scope**: Adjust the product backlog based on feedback and changing priorities.
-- **Regular Feedback Loops**: Frequent reviews mitigate the risk of deviating from stakeholder expectations.
-- **Cross-Functional Team**: Diverse skills within the team reduce dependency risks.
-- **Transparency**: Open communication channels help identify and address risks early.
-
----
+- **Technical Risks**:
+  - **AI Model Limitations**: Mitigate by refining prompts and providing more context.
+  - **Validation Challenges**: Address by improving testing frameworks.
+- **Resource Risks**:
+  - **API Usage Limits**: Monitor usage and plan for potential costs.
+  - **Time Constraints**: Prioritize tasks and adjust scope as needed.
+- **Quality Risks**:
+  - **Code Quality**: Implement thorough validation and testing.
+  - **Dataset Utility**: Gather feedback from initial LLM testing to improve.
 
 ## Conclusion
 
-This agile plan focuses on delivering valuable increments of the COBOLGen Benchmark Pilot project through iterative development. By adhering to agile principles, the team can rapidly adapt to feedback, ensure stakeholder engagement, and continuously improve the product. This approach aligns with the agile startup spirit and leverages tools like Cursor.ai to enhance productivity and collaboration.
+This agile plan provides a roadmap for developing the MVP of the **COBOLGen Benchmark Pilot**. By focusing on iterative development and continuous improvement, we aim to build a robust system that meets the project's goals and provides valuable datasets for LLM training and testing.
 
 ---
 
-## Next Steps
+## Appendix: User Stories
 
-1. **Finalize Team Structure**
-
-   - Confirm roles and responsibilities.
-   - Ensure all team members are onboarded with agile practices.
-
-2. **Initiate Sprint Zero Activities**
-
-   - Set up necessary tools and environments.
-   - Populate the product backlog with detailed user stories.
-
-3. **Begin Sprint 1**
-
-   - Kick off with a sprint planning meeting.
-   - Ensure clear understanding of sprint goals and deliverables.
-
-4. **Engage Stakeholders**
-
-   - Communicate the agile approach and expectations.
-   - Schedule regular updates and demos to maintain engagement.
-
----
-
-**Let's embrace this agile journey to deliver impactful results swiftly and efficiently. Feel free to reach out if you need further clarification or assistance with any aspect of this plan.**
+- **US01**: Create a comprehensive Feature Matrix.
+- **US02**: Generate valid combinations of features.
+- **US03**: Generate requirement templates.
+- **US04**: Automate requirement generation using AI.
+- **US05**: Generate COBOL code using AI.
+- **US06**: Ensure generated code is syntactically correct.
+- **US07**: Automate syntactic validation.
+- **US08**: Implement functional testing.
+- **US09**: Provide detailed metadata for each program.
+- **US10**: Automate documentation generation.
+- **US11**: Use the dataset for LLM training.
+- **US12**: Ensure the dataset is well-organized.
