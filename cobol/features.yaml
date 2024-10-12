@@ -1,0 +1,601 @@
+features:
+  - id: COBOL-001
+    name: Program Structure
+    category: COBOL Language
+    subcategory: Program Organization
+    description: Defines the overall structure of a COBOL program using divisions, sections, and paragraphs.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      IDENTIFICATION DIVISION.
+      PROGRAM-ID. PROGRAM-NAME.
+      ENVIRONMENT DIVISION.
+      DATA DIVISION.
+      PROCEDURE DIVISION.
+    notes: Fundamental structure required for all COBOL programs.
+
+  - id: COBOL-002
+    name: Data Types - Numeric
+    category: COBOL Language
+    subcategory: Data Types
+    description: Numeric data types used for arithmetic operations.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      01 NUM-VAR PIC 9(5).
+    notes: Includes integer and decimal representations.
+
+  - id: COBOL-003
+    name: Data Types - Alphanumeric
+    category: COBOL Language
+    subcategory: Data Types
+    description: Alphanumeric data types used for text and character data.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      01 TEXT-VAR PIC X(20).
+    notes: Commonly used for names, addresses, and other text data.
+
+  - id: COBOL-004
+    name: Level Numbers
+    category: COBOL Language
+    subcategory: Data Definitions
+    description: Hierarchical data structure definitions using level numbers (01 to 49, 66, 77, 88).
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      01 CUSTOMER-RECORD.
+         05 CUSTOMER-ID     PIC 9(5).
+         05 CUSTOMER-NAME   PIC X(30).
+    notes: Organizes data fields into groups and subgroups.
+
+  - id: COBOL-005
+    name: IF Statement
+    category: COBOL Language
+    subcategory: Control Structures
+    description: Executes code blocks based on a condition.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      IF TOTAL > 1000
+          DISPLAY 'High Value Transaction'
+      END-IF.
+    notes: Fundamental for implementing decision logic.
+
+  - id: COBOL-006
+    name: PERFORM UNTIL Loop
+    category: COBOL Language
+    subcategory: Control Structures
+    description: Repeats a code block until a condition is met.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      PERFORM VARYING I FROM 1 BY 1 UNTIL I > 10
+          DISPLAY 'Iteration: ' I
+      END-PERFORM.
+    notes: Common looping mechanism.
+
+  - id: COBOL-007
+    name: EVALUATE Statement
+    category: COBOL Language
+    subcategory: Control Structures
+    description: Multi-condition decision control similar to a switch-case.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      EVALUATE TRUE
+          WHEN AGE < 18
+              MOVE 'Minor' TO STATUS
+          WHEN AGE >= 18 AND AGE < 65
+              MOVE 'Adult' TO STATUS
+          WHEN OTHER
+              MOVE 'Senior' TO STATUS
+      END-EVALUATE.
+    notes: Useful for complex conditional logic.
+
+  - id: COBOL-008
+    name: Sequential File Handling
+    category: COBOL Language
+    subcategory: File Operations
+    description: Reading and writing files sequentially.
+    dependencies: [COBOL-009]
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      SELECT INPUT-FILE ASSIGN TO 'input.dat'.
+      FD INPUT-FILE.
+      OPEN INPUT INPUT-FILE.
+      READ INPUT-FILE
+          AT END MOVE 'Y' TO EOF-SWITCH.
+      CLOSE INPUT-FILE.
+    notes: Essential for batch processing and data storage.
+
+  - id: COBOL-009
+    name: File Definitions
+    category: COBOL Language
+    subcategory: File Operations
+    description: Defines file structure and assigns files to external names.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      SELECT FILE-NAME ASSIGN TO 'filename.dat'.
+      FD FILE-NAME.
+      01 FILE-RECORD.
+         05 FIELD-1 PIC X(10).
+         05 FIELD-2 PIC 9(5).
+    notes: Required for any file operations.
+
+  - id: COBOL-010
+    name: Indexed File Handling
+    category: COBOL Language
+    subcategory: File Operations
+    description: Accesses records in a file using keys.
+    dependencies: [COBOL-009]
+    exclusions: []
+    complexity: Intermediate
+    priority: High
+    example_usage: |
+      SELECT INDEXED-FILE ASSIGN TO 'indexed.dat'
+          ORGANIZATION IS INDEXED
+          ACCESS MODE IS RANDOM
+          RECORD KEY IS KEY-FIELD.
+      FD INDEXED-FILE.
+      OPEN I-O INDEXED-FILE.
+      READ INDEXED-FILE
+          INVALID KEY DISPLAY 'Record not found'.
+      CLOSE INDEXED-FILE.
+    notes: Requires understanding of file indexing.
+
+  - id: COBOL-011
+    name: STRING and UNSTRING
+    category: COBOL Language
+    subcategory: String Handling
+    description: Manipulates strings by concatenating or splitting.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      STRING FIRST-NAME DELIMITED BY SPACE
+             LAST-NAME DELIMITED BY SPACE
+          INTO FULL-NAME.
+    notes: Useful for text processing and data formatting.
+
+  - id: COBOL-012
+    name: Intrinsic Functions
+    category: COBOL Language
+    subcategory: Built-in Functions
+    description: Provides built-in functions for various operations.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      COMPUTE RESULT = FUNCTION MAX(VALUE-1, VALUE-2).
+    notes: Includes mathematical, date/time, and other utility functions.
+
+  - id: COBOL-013
+    name: CALL Statement
+    category: COBOL Language
+    subcategory: Program Control
+    description: Invokes subprograms or procedures.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: High
+    example_usage: |
+      CALL 'SUBPROGRAM' USING PARAM-1, PARAM-2.
+    notes: Enables modular programming and code reuse.
+
+  - id: COBOL-014
+    name: COPY Statement
+    category: COBOL Language
+    subcategory: Source Code Inclusion
+    description: Includes external code segments or copybooks.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: High
+    example_usage: |
+      COPY 'COPYBOOK-NAME'.
+    notes: Facilitates code reuse and standardization.
+
+  - id: COBOL-015
+    name: Screen Section
+    category: COBOL Language
+    subcategory: User Interface
+    description: Defines screen layouts for interactive programs.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      SCREEN SECTION.
+      01 LOGIN-SCREEN.
+         05 BLANK SCREEN.
+         05 LINE 10 COLUMN 20
+             VALUE 'Enter Username:'.
+         05 LINE 12 COLUMN 20
+             ACCEPT USERNAME.
+    notes: Used in interactive, character-based applications.
+
+  - id: COBOL-016
+    name: Object-Oriented COBOL
+    category: COBOL Language
+    subcategory: Object Orientation
+    description: Enables object-oriented programming features.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CLASS-ID. CLASS-NAME.
+      ENVIRONMENT DIVISION.
+      DATA DIVISION.
+      PROCEDURE DIVISION.
+      METHOD-ID. METHOD-NAME.
+      END METHOD METHOD-NAME.
+      END CLASS CLASS-NAME.
+    notes: Not supported in all COBOL compilers.
+
+  - id: MF-001
+    name: JCL Job Submission
+    category: Mainframe Capability
+    subcategory: JCL
+    description: Submits jobs for batch processing on a mainframe.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: High
+    example_usage: |
+      //JOBNAME JOB (ACCOUNT),'JOB DESCRIPTION',CLASS=A,MSGCLASS=A
+      //STEP1   EXEC PGM=COBOLPGM
+      //INPUT   DD DSN=INPUT.FILE,DISP=SHR
+      //OUTPUT  DD DSN=OUTPUT.FILE,DISP=(NEW,CATLG,DELETE)
+    notes: Essential for running batch jobs.
+
+  - id: MF-002
+    name: CICS Transaction Processing
+    category: Mainframe Capability
+    subcategory: CICS
+    description: Manages online transaction processing.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: High
+    example_usage: |
+      EXEC CICS SEND MAP('MAP-NAME') MAPSET('MAPSET-NAME') END-EXEC.
+      EXEC CICS RECEIVE INTO(INPUT-BUFFER) END-EXEC.
+    notes: Requires CICS environment setup.
+
+  - id: MF-003
+    name: DB2 Embedded SQL
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Executes SQL statements within a COBOL program.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: High
+    example_usage: |
+      EXEC SQL
+          SELECT COLUMN1 INTO :HOST-VAR FROM TABLE1 WHERE CONDITION
+      END-EXEC.
+    notes: Requires DB2 precompiler and database connectivity.
+
+  - id: MF-004
+    name: VSAM KSDS File Operations
+    category: Mainframe Capability
+    subcategory: VSAM
+    description: Manages Key-Sequenced Data Sets (KSDS) in VSAM.
+    dependencies: [COBOL-010]
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      SELECT VSAM-FILE ASSIGN TO 'VSAM.FILE'
+          ORGANIZATION IS INDEXED
+          ACCESS MODE IS DYNAMIC
+          RECORD KEY IS KEY-FIELD.
+      FD VSAM-FILE.
+      OPEN INPUT VSAM-FILE.
+      READ VSAM-FILE NEXT
+          AT END DISPLAY 'End of File'.
+      CLOSE VSAM-FILE.
+    notes: Common for high-performance data storage.
+
+  - id: MF-005
+    name: MQ Series Messaging
+    category: Mainframe Capability
+    subcategory: Messaging
+    description: Enables message queue operations for inter-process communication.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      CALL 'MQPUT' USING MQ-HANDLE, MQ-MESSAGE, MQ-OPTIONS.
+      CALL 'MQGET' USING MQ-HANDLE, MQ-MESSAGE, MQ-OPTIONS.
+    notes: Requires MQ setup and libraries.
+
+  - id: MF-006
+    name: RACF Security Integration
+    category: Mainframe Capability
+    subcategory: Security
+    description: Interfaces with RACF for authentication and authorization.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'RACROUTE' USING FUNCTION, PARAMETERS.
+    notes: Requires understanding of mainframe security.
+
+  - id: MF-007
+    name: Batch Processing with Schedulers
+    category: Mainframe Capability
+    subcategory: Batch Processing
+    description: Uses scheduling tools to manage batch job execution.
+    dependencies: [MF-001]
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //SCHEDULED JOB CONTROL STATEMENTS
+    notes: Integrates with tools like IBM Tivoli Workload Scheduler.
+
+  - id: MF-008
+    name: GDG (Generation Data Groups)
+    category: Mainframe Capability
+    subcategory: Data Management
+    description: Manages sequential files that are part of a group with versions.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //DDNAME DD DSN=DATA.SET.GDG(+1),DISP=(NEW,CATLG,DELETE)
+    notes: Useful for versioning data sets over time.
+
+  - id: COBOL-017
+    name: Error Handling with Declaratives
+    category: COBOL Language
+    subcategory: Error Handling
+    description: Provides a way to handle exceptions and errors using declaratives.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      DECLARATIVES.
+      ERROR-HANDLING SECTION.
+      USE AFTER EXCEPTION ON INPUT-FILE.
+          DISPLAY 'Error reading file'.
+      END DECLARATIVES.
+    notes: Allows centralized error handling logic.
+
+  - id: COBOL-018
+    name: Report Writer
+    category: COBOL Language
+    subcategory: Reporting
+    description: Simplifies the creation of formatted reports.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      REPORT SECTION.
+      RD SALES-REPORT.
+      01 TYPE PAGE HEADING.
+         03 COL 1 VALUE 'Sales Report'.
+      PROCEDURE DIVISION.
+      INITIATE SALES-REPORT.
+      GENERATE SALES-REPORT.
+      TERMINATE SALES-REPORT.
+    notes: Not commonly used in modern COBOL programs.
+
+  - id: COBOL-019
+    name: Nested Programs
+    category: COBOL Language
+    subcategory: Program Structure
+    description: Defines programs within programs, allowing for nested scope.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      IDENTIFICATION DIVISION.
+      PROGRAM-ID. MAIN-PROGRAM.
+      ...
+      IDENTIFICATION DIVISION.
+      PROGRAM-ID. NESTED-PROGRAM.
+      ...
+    notes: Enhances modularity but can increase complexity.
+
+  - id: COBOL-020
+    name: Conditional Compilation
+    category: COBOL Language
+    subcategory: Compilation
+    description: Includes or excludes code at compile time based on conditions.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Low
+    example_usage: |
+      $IF DEFINED(DEBUG)
+          DISPLAY 'Debug Mode Active'.
+      $END
+    notes: Useful for debugging and environment-specific code.
+
+  - id: MF-009
+    name: IMS Database Access
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Interfaces with IMS hierarchical databases.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'CBLTDLI' USING FUNCTION-CODE, PCB-MASK, IO-AREA.
+    notes: Requires IMS setup and understanding of hierarchical data models.
+
+  - id: COBOL-021
+    name: Multithreading Support
+    category: COBOL Language
+    subcategory: Concurrency
+    description: Enables concurrent execution within a COBOL program.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      SET THREAD POINTER TO ADDRESS OF THREAD-AREA.
+    notes: Not all compilers support multithreading.
+
+  - id: COBOL-022
+    name: JSON Parsing and Generation
+    category: COBOL Language
+    subcategory: Data Interchange
+    description: Handles JSON data within COBOL programs.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      INVOKE JSON PARSE
+          WITH INPUT JSON-DATA
+          GIVING DATA-STRUCTURE.
+    notes: Modern addition for interoperability.
+
+  - id: COBOL-023
+    name: XML Parsing and Generation
+    category: COBOL Language
+    subcategory: Data Interchange
+    description: Processes XML documents within COBOL programs.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      XML PARSE XML-DATA
+          PROCESSING PROCEDURE IS XML-HANDLER.
+    notes: Facilitates data exchange with other systems.
+
+  - id: MF-010
+    name: Stored Procedures in DB2
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Calls DB2 stored procedures from COBOL.
+    dependencies: [MF-003]
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      EXEC SQL
+          CALL PROCEDURE-NAME(:PARAM-1, :PARAM-2)
+      END-EXEC.
+    notes: Enhances database operation efficiency.
+
+  - id: COBOL-024
+    name: Event Handling
+    category: COBOL Language
+    subcategory: Event-Driven Programming
+    description: Responds to events within an application.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      METHOD-ID. EVENT-HANDLER.
+          IF EVENT-TYPE = 'CLICK'
+              PERFORM ACTION
+          END-IF.
+      END METHOD.
+    notes: Relevant in GUI or interactive applications.
+
+  - id: MF-011
+    name: CICS Web Services
+    category: Mainframe Capability
+    subcategory: CICS
+    description: Exposes CICS programs as web services.
+    dependencies: [MF-002]
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      EXEC CICS INVOKE WEBSERVICE('SERVICE-NAME')
+          CHANNEL('CHANNEL-NAME')
+      END-EXEC.
+    notes: Enables SOA integration.
+
+  - id: COBOL-025
+    name: Unicode Support
+    category: COBOL Language
+    subcategory: Data Types
+    description: Handles Unicode character data.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      01 UNICODE-TEXT PIC N(100).
+    notes: Important for internationalization.
+
+  - id: MF-012
+    name: Assembler Interface
+    category: Mainframe Capability
+    subcategory: Interoperability
+    description: Calls assembler routines from COBOL.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'ASMROUTINE' USING BY REFERENCE PARAM-AREA.
+    notes: Allows low-level operations.
+
+  - id: COBOL-026
+    name: Dynamic Memory Allocation
+    category: COBOL Language
+    subcategory: Memory Management
+    description: Allocates and deallocates memory at runtime.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      ALLOCATE MEMORY-POINTER
+          SIZE MEMORY-SIZE.
+      FREE MEMORY-POINTER.
+    notes: Useful for variable-sized data.
+
+  - id: MF-013
+    name: LE (Language Environment) Features
+    category: Mainframe Capability
+    subcategory: Runtime Environment
+    description: Utilizes IBM's Language Environment for runtime services.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      CALL 'CEEGTSTD' USING THREAD-STORAGE.
+    notes: Provides common runtime services across languages.
