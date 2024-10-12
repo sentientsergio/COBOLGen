@@ -1,0 +1,430 @@
+mainframe_capabilities:
+  - id: MF-001
+    name: JCL Job Submission
+    category: Mainframe Capability
+    subcategory: JCL
+    description: Submits jobs for batch processing on a mainframe.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: High
+    example_usage: |
+      //JOBNAME JOB (ACCOUNT),'JOB DESCRIPTION',CLASS=A,MSGCLASS=A
+      //STEP1   EXEC PGM=COBOLPGM
+      //INPUT   DD DSN=INPUT.FILE,DISP=SHR
+      //OUTPUT  DD DSN=OUTPUT.FILE,DISP=(NEW,CATLG,DELETE)
+    notes: Essential for running batch jobs.
+
+  - id: MF-002
+    name: CICS Transaction Processing
+    category: Mainframe Capability
+    subcategory: CICS
+    description: Manages online transaction processing.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: High
+    example_usage: |
+      EXEC CICS SEND MAP('MAP-NAME') MAPSET('MAPSET-NAME') END-EXEC.
+      EXEC CICS RECEIVE INTO(INPUT-BUFFER) END-EXEC.
+    notes: Requires CICS environment setup.
+
+  - id: MF-003
+    name: DB2 Embedded SQL
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Executes SQL statements within a COBOL program.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: High
+    example_usage: |
+      EXEC SQL
+          SELECT COLUMN1 INTO :HOST-VAR FROM TABLE1 WHERE CONDITION
+      END-EXEC.
+    notes: Requires DB2 precompiler and database connectivity.
+
+  - id: MF-004
+    name: VSAM KSDS File Operations
+    category: Mainframe Capability
+    subcategory: VSAM
+    description: Manages Key-Sequenced Data Sets (KSDS) in VSAM.
+    dependencies:
+      - COBOL-010 # Assuming COBOL-010 is 'Indexed File Handling' in features.yaml
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      SELECT VSAM-FILE ASSIGN TO 'VSAM.FILE'
+          ORGANIZATION IS INDEXED
+          ACCESS MODE IS DYNAMIC
+          RECORD KEY IS KEY-FIELD.
+      FD VSAM-FILE.
+      OPEN INPUT VSAM-FILE.
+      READ VSAM-FILE NEXT
+          AT END DISPLAY 'End of File'.
+      CLOSE VSAM-FILE.
+    notes: Common for high-performance data storage.
+
+  - id: MF-005
+    name: MQ Series Messaging
+    category: Mainframe Capability
+    subcategory: Messaging
+    description: Enables message queue operations for inter-process communication.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      CALL 'MQPUT' USING MQ-HANDLE, MQ-MESSAGE, MQ-OPTIONS.
+      CALL 'MQGET' USING MQ-HANDLE, MQ-MESSAGE, MQ-OPTIONS.
+    notes: Requires MQ setup and libraries.
+
+  - id: MF-006
+    name: RACF Security Integration
+    category: Mainframe Capability
+    subcategory: Security
+    description: Interfaces with RACF for authentication and authorization.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'RACROUTE' USING FUNCTION, PARAMETERS.
+    notes: Requires understanding of mainframe security.
+
+  - id: MF-007
+    name: Batch Processing with Schedulers
+    category: Mainframe Capability
+    subcategory: Batch Processing
+    description: Uses scheduling tools to manage batch job execution.
+    dependencies:
+      - MF-001 # JCL Job Submission
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //SCHEDULED JOB CONTROL STATEMENTS
+    notes: Integrates with tools like IBM Tivoli Workload Scheduler.
+
+  - id: MF-008
+    name: GDG (Generation Data Groups)
+    category: Mainframe Capability
+    subcategory: Data Management
+    description: Manages sequential files that are part of a group with versions.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //DDNAME DD DSN=DATA.SET.GDG(+1),DISP=(NEW,CATLG,DELETE)
+    notes: Useful for versioning data sets over time.
+
+  - id: MF-009
+    name: IMS Database Access
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Interfaces with IMS hierarchical databases.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'CBLTDLI' USING FUNCTION-CODE, PCB-MASK, IO-AREA.
+    notes: Requires IMS setup and understanding of hierarchical data models.
+
+  - id: MF-010
+    name: Stored Procedures in DB2
+    category: Mainframe Capability
+    subcategory: Database Access
+    description: Calls DB2 stored procedures from COBOL.
+    dependencies:
+      - MF-003 # DB2 Embedded SQL
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      EXEC SQL
+          CALL PROCEDURE-NAME(:PARAM-1, :PARAM-2)
+      END-EXEC.
+    notes: Enhances database operation efficiency.
+
+  - id: MF-011
+    name: CICS Web Services
+    category: Mainframe Capability
+    subcategory: CICS
+    description: Exposes CICS programs as web services.
+    dependencies:
+      - MF-002 # CICS Transaction Processing
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      EXEC CICS INVOKE WEBSERVICE('SERVICE-NAME')
+          CHANNEL('CHANNEL-NAME')
+      END-EXEC.
+    notes: Enables SOA integration.
+
+  - id: MF-012
+    name: Assembler Interface
+    category: Mainframe Capability
+    subcategory: Interoperability
+    description: Calls assembler routines from COBOL.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'ASMROUTINE' USING BY REFERENCE PARAM-AREA.
+    notes: Allows low-level operations.
+
+  - id: MF-013
+    name: LE (Language Environment) Features
+    category: Mainframe Capability
+    subcategory: Runtime Environment
+    description: Utilizes IBM's Language Environment for runtime services.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      CALL 'CEEGTSTD' USING THREAD-STORAGE.
+    notes: Provides common runtime services across languages.
+
+  - id: MF-014
+    name: Batch Reports with DFSORT
+    category: Mainframe Capability
+    subcategory: Data Processing
+    description: Uses DFSORT utility for sorting and reporting data.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //SORTSTEP EXEC PGM=SORT
+      //SYSIN    DD *
+          SORT FIELDS=(1,10,CH,A)
+      /*
+    notes: Useful for data manipulation without coding.
+
+  - id: MF-015
+    name: Mainframe Security with ACF2
+    category: Mainframe Capability
+    subcategory: Security
+    description: Manages access control and authentication using CA ACF2.
+    dependencies: []
+    exclusions:
+      - MF-006 # RACF Security Integration
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      // Security definitions and control statements
+    notes: Alternative to RACF for security management.
+
+  - id: MF-016
+    name: Tape Storage Operations
+    category: Mainframe Capability
+    subcategory: Storage Management
+    description: Reads from and writes to tape storage devices.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Low
+    example_usage: |
+      //TAPEIN  DD DSN=TAPE.FILE,UNIT=TAPE,DISP=OLD
+    notes: Used for archival data and backups.
+
+  - id: MF-017
+    name: SMF (System Management Facility) Logging
+    category: Mainframe Capability
+    subcategory: System Monitoring
+    description: Records system and job-related events for auditing and analysis.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      //SYSIN DD *
+        SMF RECORDING OPTIONS
+      /*
+    notes: Essential for performance tuning and security auditing.
+
+  - id: MF-018
+    name: REXX Scripting Integration
+    category: Mainframe Capability
+    subcategory: Scripting
+    description: Executes REXX scripts from within JCL or applications.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //REXXEXEC EXEC PGM=IRXJCL
+      //SYSTSIN  DD *
+        EXEC 'REXX.SCRIPT(MYSCRIPT)'
+      /*
+    notes: Enhances automation and utility functions.
+
+  - id: MF-019
+    name: Inter-Region Communication (IRC)
+    category: Mainframe Capability
+    subcategory: Communication
+    description: Facilitates communication between CICS regions.
+    dependencies:
+      - MF-002 # CICS Transaction Processing
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      EXEC CICS START TRANSID('TRNID') TERMID('TERMID') END-EXEC.
+    notes: Useful for load balancing and resource sharing.
+
+  - id: MF-020
+    name: High-Level Assembler (HLASM) Macros
+    category: Mainframe Capability
+    subcategory: Interoperability
+    description: Uses assembler macros within applications for performance-critical tasks.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      COPY ASM(MACRO-NAME)
+    notes: Allows integration of low-level code.
+
+  - id: MF-021
+    name: JES2 and JES3 Job Management
+    category: Mainframe Capability
+    subcategory: Job Management
+    description: Controls job execution and output handling in the mainframe environment.
+    dependencies: []
+    exclusions: []
+    complexity: Intermediate
+    priority: Medium
+    example_usage: |
+      //JOBNAME JOB (ACCOUNT),'JOB DESC',CLASS=A,MSGCLASS=A
+      //OUTPUT  JESDS=ALL
+    notes: Essential for job submission and management.
+
+  - id: MF-022
+    name: ISPF Panel Creation
+    category: Mainframe Capability
+    subcategory: User Interface
+    description: Creates interactive panels using ISPF for user interactions.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      )BODY
+      %----------------------
+      % Panel content here
+      %----------------------
+    notes: Used for custom tools and utilities.
+
+  - id: MF-023
+    name: SDSF Output Viewing
+    category: Mainframe Capability
+    subcategory: System Utilities
+    description: Accesses and manages job output using SDSF.
+    dependencies: []
+    exclusions: []
+    complexity: Basic
+    priority: Medium
+    example_usage: |
+      View and manage outputs in SDSF panels.
+    notes: Common tool for operations staff.
+
+  - id: MF-024
+    name: Encryption and Decryption with ICSF
+    category: Mainframe Capability
+    subcategory: Security
+    description: Performs cryptographic operations using Integrated Cryptographic Service Facility.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      CALL 'CSNBCSY' USING PARAMETERS FOR ENCRYPTION.
+    notes: Requires proper security setup and permissions.
+
+  - id: MF-025
+    name: UNIX System Services (USS) Integration
+    category: Mainframe Capability
+    subcategory: Interoperability
+    description: Interacts with UNIX files and commands from the mainframe.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      //STEP1 EXEC PGM=BPXBATCH
+      //STDIN  DD *
+        UNIX commands here
+      /*
+    notes: Enables use of UNIX tools on the mainframe.
+
+  - id: MF-026
+    name: z/OS Connect Enterprise Edition
+    category: Mainframe Capability
+    subcategory: APIs and Services
+    description: Exposes mainframe assets as RESTful APIs.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      Configuration and deployment of APIs through z/OS Connect.
+    notes: Facilitates modern integration approaches.
+
+  - id: MF-027
+    name: WebSphere MQ Integration
+    category: Mainframe Capability
+    subcategory: Messaging
+    description: Connects applications using message queues with IBM MQ.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Medium
+    example_usage: |
+      CALL 'MQPUT' USING MQ-HANDLE, MQ-MESSAGE, MQ-OPTIONS.
+    notes: Similar to MF-005 but specifically with WebSphere MQ.
+
+  - id: MF-028
+    name: SMP/E for Software Installation
+    category: Mainframe Capability
+    subcategory: System Maintenance
+    description: Manages software installation and maintenance using System Modification Program Extended.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      SMP/E commands and JCL for applying PTFs.
+    notes: Critical for system programmers.
+
+  - id: MF-029
+    name: z/OS Workload Manager (WLM)
+    category: Mainframe Capability
+    subcategory: Performance Management
+    description: Prioritizes and manages system resources for workloads.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      WLM policy definitions and adjustments.
+    notes: Ensures optimal system performance.
+
+  - id: MF-030
+    name: HSM (Hierarchical Storage Management)
+    category: Mainframe Capability
+    subcategory: Storage Management
+    description: Automates data migration between storage tiers.
+    dependencies: []
+    exclusions: []
+    complexity: Advanced
+    priority: Low
+    example_usage: |
+      HSM commands for data backup and recall.
+    notes: Helps manage storage costs and efficiency.
